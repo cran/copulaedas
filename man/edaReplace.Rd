@@ -6,7 +6,7 @@
 \title{Replacement Methods}
 
 \description{
-Method definitions for the \code{edaReplace} generic function.
+Methods for the \code{edaReplace} generic function.
 }
 
 \usage{
@@ -14,24 +14,24 @@ edaReplaceComplete(eda, gen, pop, popEval, sampledPop, sampledEval)
 }
 
 \arguments{
-  \item{eda}{An \code{\linkS4class{EDA}} instance.}
+  \item{eda}{\code{\linkS4class{EDA}} instance.}
 
   \item{gen}{Generation.}
 
-  \item{pop}{Matrix with one row for each individual in the population.}
+  \item{pop}{Matrix with one row for each solution in the population.}
 
-  \item{popEval}{Vector with the evaluation of each individual in \code{pop}.}
-  
-  \item{sampledPop}{Matrix with one row for each individual sampled in the 
+  \item{popEval}{Vector with the evaluation of each solution in \code{pop}.}
+
+  \item{sampledPop}{Matrix with one row for each solution sampled in the
     current generation.}
-    
-  \item{sampledEval}{Vector with the evaluation of the individuals in
-    \code{sampledPop}.}
+
+  \item{sampledEval}{Vector with the evaluation of the candidate solutions
+    in \code{sampledPop}.}
 }
 
 \details{
-Replacement methods are used to combine the individuals sampled in the
-current generation with individuals from the population of the previous
+Replacement methods combine the candidate solutions sampled in the current 
+generation with the candidate solutions from the population of the previous 
 generation. The following replacement methods are implemented.
 
 \describe{
@@ -41,10 +41,9 @@ generation. The following replacement methods are implemented.
 }
 
 \value{
-A \code{"list"} object with the following components.
+A \code{list} with the following components.
 
-\item{pop}{Matrix with one row for each individual in the resulting population.}
+\item{pop}{Matrix with one row for each solution in the new population.}
 
-\item{popEval}{Vector with the evaluation of each individual in the 
-  resulting population.}
+\item{popEval}{Vector with the evaluation of each solution in \code{pop}.}
 }

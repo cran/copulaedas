@@ -6,7 +6,7 @@
 \title{Local Optimization Methods}
 
 \description{
-Method definitions for the \code{edaOptimize} generic function.
+Methods for the \code{edaOptimize} generic function.
 }
 
 \usage{
@@ -14,13 +14,13 @@ edaOptimizeDisabled(eda, gen, pop, popEval, f, lower, upper)
 }
 
 \arguments{
-  \item{eda}{An \code{\linkS4class{EDA}} instance.}
+  \item{eda}{\code{\linkS4class{EDA}} instance.}
 
   \item{gen}{Generation.}
 
-  \item{pop}{Matrix with one row for each individual in the population.}
+  \item{pop}{Matrix with one row for each solution in the population.}
 
-  \item{popEval}{Vector with the evaluation of each individual in \code{pop}.}
+  \item{popEval}{Vector with the evaluation of each solution in \code{pop}.}
 
   \item{f}{Objective function}
 
@@ -30,19 +30,22 @@ edaOptimizeDisabled(eda, gen, pop, popEval, f, lower, upper)
 }
 
 \details{
-Local optimization methods are used to improve the solutions sampled by the 
-search distribution. The following local optimization methods are implemented.
+Local optimization methods improve the solutions sampled by the search 
+distribution. These methods can also be used to implement repairing
+strategies for constrained problems where the simulated solutions may be 
+unfeasible and some strategy to repair these solutions is available.
+
+The following local optimization methods are implemented.
 
 \describe{
-  \item{\code{edaOptimizeDisabled}}{Disable the local optimization.}
+  \item{\code{edaOptimizeDisabled}}{Disable local optimization.}
 }
 }
 
 \value{
-A \code{"list"} object with the following components.
+A \code{list} with the following components.
 
-  \item{pop}{Matrix with one row for each individual in the optimized population.}
+\item{pop}{Matrix with one row for each solution in the optimized population.}
   
-  \item{popEval}{Vector with the evaluation of each individual in the optimized 
-    population.}
+\item{popEval}{Vector with the evaluation of each solution in \code{pop}.}
 }

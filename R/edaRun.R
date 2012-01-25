@@ -1,38 +1,36 @@
-# copulaedas: Estimation of Distribution Algorithms based on Copula Theory
-# Copyright (C) 2010, 2011 Yasser González-Fernández <ygf@icimaf.cu>
-# Copyright (C) 2010, 2011 Marta Soto <mrosa@icimaf.cu>
+# copulaedas: Estimation of Distribution Algorithms Based on Copulas
+# Copyright (C) 2010-2012 Yasser González-Fernández <ygf@icimaf.cu>
+# Copyright (C) 2010-2012 Marta Soto <mrosa@icimaf.cu>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 3 of the License, or (at your option) any later 
+# Foundation, either version 3 of the License, or (at your option) any later
 # version.
 #
-# This program is distributed in the hope that it will be useful, but WITHOUT 
+# This program is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more 
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
 # details.
 #
-# You should have received a copy of the GNU General Public License along with 
+# You should have received a copy of the GNU General Public License along with
 # this program. If not, see <http://www.gnu.org/licenses/>.
 
 setClass("EDAResult",
-        representation = representation(
-                eda = "EDA",
-                f = "function",
-                lower = "numeric",
-                upper = "numeric",
-                numGens = "numeric",
-                fEvals = "numeric",
-                bestEval = "numeric",
-                bestIndiv = "numeric",
-                cpuTime = "numeric"))
+    representation = representation(
+        eda = "EDA",
+        f = "function",
+        lower = "numeric",
+        upper = "numeric",
+        numGens = "numeric",
+        fEvals = "numeric",
+        bestEval = "numeric",
+        bestSol = "numeric",
+        cpuTime = "numeric"))
 
 
 showEDAResult <- function (object) {
-    names <- c("Best function evaluation",
-               "No. of generations",
-               "No. of function evaluations",
-               "CPU time")
+    names <- c("Best function evaluation", "No. of generations",
+               "No. of function evaluations", "CPU time")
     values <- c(format(object@bestEval, scientific = TRUE),
                 format(object@numGens),
                 format(object@fEvals),
@@ -53,7 +51,7 @@ edaRun <- function (eda, f, lower, upper) {
     terminate <- FALSE
     fEvals <- 0; fWrap <- function (...) { fEvals <<- fEvals + 1; f(...) }
     bestEval <- NA
-    bestIndiv <- NA
+    bestSol <- NA
     startTime <- proc.time()
 
     while (!terminate) {
@@ -63,9 +61,8 @@ edaRun <- function (eda, f, lower, upper) {
             model <- NULL
 
             pop <- edaSeed(eda, lower, upper)
-
             popEval <- sapply(seq(length = nrow(pop)),
-                    function (i) fWrap(pop[i, ]))
+                function (i) fWrap(pop[i, ]))
 
             r <- edaOptimize(eda, gen, pop, popEval, fWrap, lower, upper) 
             pop <- r$pop
@@ -76,15 +73,14 @@ edaRun <- function (eda, f, lower, upper) {
             selectedEval <- popEval[s]
 
             model <- edaLearn(eda, gen, model, 
-                    selectedPop, selectedEval, lower, upper)
+                selectedPop, selectedEval, lower, upper)
 
             sampledPop <- edaSample(eda, gen, model, lower, upper)
-
             sampledEval <- sapply(seq(length = nrow(sampledPop)),
-                    function (i) fWrap(sampledPop[i, ]))
+                function (i) fWrap(sampledPop[i, ]))
 
             r <- edaOptimize(eda, gen, sampledPop, sampledEval, 
-                    fWrap, lower, upper) 
+                fWrap, lower, upper) 
             sampledPop <- r$pop
             sampledEval <- r$popEval
             
@@ -100,21 +96,21 @@ edaRun <- function (eda, f, lower, upper) {
         if (is.na(bestEval) || min(popEval) < bestEval) {
             i <- which.min(popEval)
             bestEval <- popEval[i]
-            bestIndiv <- pop[i, ]
+            bestSol <- pop[i, ]
         }
     }
 
     elapsedTime <- proc.time() - startTime
     result <- new("EDAResult",
-            eda = eda,
-            f = f,
-            lower = lower,
-            upper = upper,
-            numGens = gen,
-            fEvals = fEvals,
-            bestEval = bestEval,
-            bestIndiv = bestIndiv,
-            cpuTime = sum(elapsedTime, na.rm = TRUE) - elapsedTime[3])
+        eda = eda,
+        f = f,
+        lower = lower,
+        upper = upper,
+        numGens = gen,
+        fEvals = fEvals,
+        bestEval = bestEval,
+        bestSol = bestSol,
+        cpuTime = sum(elapsedTime, na.rm = TRUE) - elapsedTime[3])
 
     result
 }
