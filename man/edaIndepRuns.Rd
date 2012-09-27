@@ -13,21 +13,27 @@ edaIndepRuns(eda, f, lower, upper, runs, verbose = FALSE)
 }
 
 \arguments{
-  \item{eda}{\code{\linkS4class{EDA}} instance.}
+\item{eda}{\code{\linkS4class{EDA}} instance.}
 
-  \item{f}{Objective function}
+\item{f}{Objective function}
 
-  \item{lower}{Lower bounds of the variables of the objective function.}
+\item{lower}{Lower bounds of the variables of the objective function.}
 
-  \item{upper}{Upper bounds of the variables of the objective function.}
+\item{upper}{Upper bounds of the variables of the objective function.}
 
-  \item{runs}{Number of runs.}
+\item{runs}{Number of runs.}
 
-  \item{verbose}{Print information after each run and a final summary.}
+\item{verbose}{Print information after each run and a final summary.}
 }
 
 \value{
 An \code{\linkS4class{EDAResults}} instance.
+}
+
+\references{
+González-Fernández Y and Soto M (2012). copulaedas: An R Package for
+Estimation of Distribution Algorithms Based on Copulas. Preprint
+\href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
 }
 
 \seealso{

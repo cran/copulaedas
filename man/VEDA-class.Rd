@@ -69,7 +69,7 @@ A Cramér-von Mises statistic is used as the measure of distance
 
 The parameters of all the candidate copulas but the t copula are estimated
 using the inversion of Kendall's tau. In the case of the t copula,
-the correlation coeffcient is computed using the inversion of Kendall's tau
+the correlation coefficient is computed using the inversion of Kendall's tau
 and the degrees of freedom are estimated by maximum likelihood with the 
 correlation parameter fixed (Demarta and McNeil 2005).
 
@@ -134,6 +134,10 @@ l'Institut Henri Poincaré: Probabilités et Statistiques}, \bold{44},
 
 González-Fernández Y (2011). Algoritmos con estimación de distribuciones 
 basados en cópulas y vines. Bachelor thesis, University of Havana, Cuba.
+
+González-Fernández Y and Soto M (2012). copulaedas: An R Package for
+Estimation of Distribution Algorithms Based on Copulas. Preprint
+\href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
 
 Joe H (1996). Families of \eqn{m}-variate Distributions with Given Margins 
 and \eqn{m(m-1)/2} Bivariate Dependence Parameters. In L Röschendorf, 

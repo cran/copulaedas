@@ -15,30 +15,30 @@ edaCriticalPopSize(eda, f, lower, upper, fEval, fEvalTol,
 }
 
 \arguments{
-  \item{eda}{\code{\linkS4class{EDA}} instance.}
+\item{eda}{\code{\linkS4class{EDA}} instance.}
 
-  \item{f}{Objective function.}
+\item{f}{Objective function.}
 
-  \item{lower}{Lower bounds of the variables of the objective function.}
+\item{lower}{Lower bounds of the variables of the objective function.}
 
-  \item{upper}{Upper bounds of the variables of the objective function.}
+\item{upper}{Upper bounds of the variables of the objective function.}
 
-  \item{fEval}{Optimum value of the objective function.}
+\item{fEval}{Optimum value of the objective function.}
 
-  \item{fEvalTol}{A run is considered successful if the difference between
-    \code{fEval} and the best found solution is less than \code{fEvalTol}.}
+\item{fEvalTol}{A run is considered successful if the difference between
+  \code{fEval} and the best found solution is less than \code{fEvalTol}.}
 
-  \item{totalRuns}{Total number of runs.}
+\item{totalRuns}{Total number of runs.}
 
-  \item{successRuns}{Required number of successfully runs.}
+\item{successRuns}{Required number of successfully runs.}
 
-  \item{lowerPop}{Lower bound of the initial interval for the population.}
+\item{lowerPop}{Lower bound of the initial interval for the population.}
 
-  \item{upperPop}{Upper bound of the initial interval for the population.}
+\item{upperPop}{Upper bound of the initial interval for the population.}
 
-  \item{stopPercent}{Stop percent.}
+\item{stopPercent}{Stop percent.}
 
-  \item{verbose}{Print progress information.}
+\item{verbose}{Print progress information.}
 }
 
 \details{
@@ -65,6 +65,10 @@ of the EDA using the critical population size.
 }
 
 \references{
+González-Fernández Y and Soto M (2012). copulaedas: An R Package for
+Estimation of Distribution Algorithms Based on Copulas. Preprint
+\href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
+
 Pelikan M (2005). \emph{Hierarchical Bayesian Optimization Algorithm. 
 Toward a New Generation of Evolutionary Algorithms}. Springer-Verlag.
 }

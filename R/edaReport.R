@@ -1,6 +1,6 @@
 # copulaedas: Estimation of Distribution Algorithms Based on Copulas
-# Copyright (C) 2010-2012 Yasser González-Fernández <ygf@icimaf.cu>
-# Copyright (C) 2010-2012 Marta Soto <mrosa@icimaf.cu>
+# Copyright (C) 2010-2012 Yasser González Fernández <ygonzalezfernandez@gmail.com>
+# Copyright (C) 2010-2012 Marta Rosa Soto Ortiz <mrosa@icimaf.cu>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -32,6 +32,19 @@ edaReportSimple <- function (eda, gen, fEvals, model, pop, popEval) {
     cat(format(gen, width = width),
         format(stats, scientific = TRUE, width = width),
         "\n")
+}
+
+
+edaReportDumpPop <- function (eda, gen, fEvals, model, pop, popEval) {
+    write.table(pop, file = paste("pop_", gen, ".txt", sep = ""),
+            row.names = FALSE, col.names = FALSE, quote = FALSE)
+}
+
+
+edaReportDumpSelectedPop <- function (eda, gen, fEvals, model, pop, popEval) {
+    selectedPop <- pop[edaSelect(eda, gen, pop, popEval), ]
+    write.table(selectedPop, file = paste("sel_", gen, ".txt", sep = ""),
+            row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 
 

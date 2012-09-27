@@ -1,6 +1,6 @@
 # copulaedas: Estimation of Distribution Algorithms Based on Copulas
-# Copyright (C) 2010-2012 Yasser González-Fernández <ygf@icimaf.cu>
-# Copyright (C) 2010-2012 Marta Soto <mrosa@icimaf.cu>
+# Copyright (C) 2010-2012 Yasser González Fernández <ygonzalezfernandez@gmail.com>
+# Copyright (C) 2010-2012 Marta Rosa Soto Ortiz <mrosa@icimaf.cu>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -20,3 +20,36 @@ edaReplaceComplete <- function (eda, gen, pop, popEval, sampledPop, sampledEval)
 }
 
 setMethod("edaReplace", "EDA", edaReplaceComplete)
+
+
+edaReplaceRTR <- function (eda, gen, pop, popEval, sampledPop, sampledEval) {
+    windowSize <- eda@parameters$windowSize
+    
+    if (is.null(windowSize)) windowSize <- min(ncol(pop), nrow(pop) / 2)
+    
+    newPop <- pop
+    newPopEval <- popEval
+    
+    for (i in seq(length = nrow(sampledPop))) {
+        X <- sampledPop[i, ]
+        fX <- sampledEval[i]
+        
+        bestDist <- Inf
+        W <- sample(nrow(pop), windowSize)
+        for (j in seq(length = windowSize)) {
+            d <- as.real(dist(rbind(X, pop[W[j], ])))
+            if (d < bestDist) {
+                bestDist <- d
+                Y <- pop[W[j], ]
+                jY <- j
+            }
+        }
+        
+        if (fX < popEval[W[jY]]) {
+            newPop[W[jY], ] <- X
+            newPopEval[W[jY]] <- fX
+        }
+    }
+    
+    return(list(pop = newPop, popEval = newPopEval))
+}
