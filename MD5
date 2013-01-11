@@ -1,13 +1,13 @@
-1ea6b6c9ac9ddbf170faa212cbe454f3 *DESCRIPTION
-032fd61e514d71ba39bc26fbf41bb115 *NAMESPACE
-219c1993ac2fd3d469e1732ae9d33694 *NEWS
+dfe1c9f05106b5db01fe67d51e0f2fe2 *DESCRIPTION
+fdfbe2f415180459b736791a4b4caa56 *NAMESPACE
+1684cdd44d6b6a72601760e9fcf882df *NEWS
 4cfd436a83751ab3e9d7595eee39753d *R/CEDA.R
 28b6c4f73f965460570d14fcbb6754e7 *R/EDA.R
-61d98d65284ab302f54ddf46817d43a8 *R/VEDA.R
+87a83493807cc3a9baca0335e8158dd5 *R/VEDA.R
 735fbc324ff9c3a62cacf8d0406a1660 *R/edaCriticalPopSize.R
 42f05869c14641144e26204d232517a3 *R/edaIndepRuns.R
 7e27071cda595b96f8bc16a094669d95 *R/edaOptimize.R
-7dae38340208c3772839e8c2508ab4c6 *R/edaReplace.R
+18aad4dc81c58032a8cae7ea92bbac09 *R/edaReplace.R
 e8a10b5e0361941d877ffcd67b06f0f3 *R/edaReport.R
 3f0304009ff0f243a0b1dabc31e56a91 *R/edaRun.R
 211ca013d3f3661dd7c3c9829df90011 *R/edaSeed.R
@@ -17,7 +17,7 @@ e8a10b5e0361941d877ffcd67b06f0f3 *R/edaReport.R
 eb5e1ac948fadbdec303963c2fb35f22 *R/problems.R
 290e13ba0a6a092389b47082761a7e22 *inst/CITATION
 4cf896d426fd2267c49f5e021f53c48f *inst/doc/copulaedas-manual.Rnw
-93301a5607785cc0bf4601a7ee340401 *inst/doc/copulaedas-manual.pdf
+0e82e91c5a860fed64665e40fb9c6782 *inst/doc/copulaedas-manual.pdf
 4e45ef07e214b14bfb219b1f83025408 *man/CEDA-class.Rd
 e025f9ad3f6e9ec73cf80c92a72a8d7b *man/EDA-class.Rd
 fc70891a741cd1072b76a9f11ca8e224 *man/EDAResult-class.Rd
@@ -34,3 +34,4 @@ c558b4a44b8d5aca9eb89b131865d897 *man/edaSelect.Rd
 91759ff7733deefbff0914204f1afe94 *man/edaTerminate.Rd
 e00be96147711157ceb78bc428910413 *man/margins.Rd
 e824e5ef22cf1c3fe2c136671f443dab *man/problems.Rd
+c727cdf0517c880dd3efe8d9766013e8 *src/cramer_vonMises.c
