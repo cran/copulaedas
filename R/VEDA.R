@@ -1,6 +1,6 @@
 # copulaedas: Estimation of Distribution Algorithms Based on Copulas
-# Copyright (C) 2010-2012 Yasser González Fernández <ygonzalezfernandez@gmail.com>
-# Copyright (C) 2010-2012 Marta Rosa Soto Ortiz <mrosa@icimaf.cu>
+# Copyright (C) 2010-2013 Yasser Gonzalez-Fernandez <ygonzalezfernandez@gmail.com>
+# Copyright (C) 2010-2013 Marta Soto <mrosa@icimaf.cu>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -30,11 +30,15 @@ edaLearnVEDA <- function (eda, gen, previousModel, selectedPop,
         selectedEval, lower, upper) {
     margin <- eda@parameters$margin
     vine <- eda@parameters$vine
+    trees <- eda@parameters$trees
+    truncMethod <- eda@parameters$truncMethod
     copulas <- eda@parameters$copulas
     indepTestSigLevel <- eda@parameters$indepTestSigLevel
 
     if (is.null(margin)) margin <- "norm"
     if (is.null(vine)) vine <- "DVine"
+    if (is.null(trees)) trees <- ncol(selectedPop) - 1
+    if (is.null(truncMethod)) truncMethod <- "AIC"
     if (is.null(copulas)) copulas <- c("normal")
     if (is.null(indepTestSigLevel)) indepTestSigLevel <- 0.01
 
@@ -118,11 +122,11 @@ edaLearnVEDA <- function (eda, gen, previousModel, selectedPop,
     # and used for the rest of the generations.
     indepTestStat <- previousModel$indepTestStat
     if (is.null(indepTestStat)) {
-        indepTestStat <- indepTestSim(m, 2, print.every = -1)
+        indepTestStat <- indepTestSim(m, 2, verbose = FALSE)
     }
 
-    vine <- vineFit(type = vine, data = orderedPop,
-            selectCopula = selectCopula, truncMethod = "AIC",
+    vine <- vineFit(type = vine, data = orderedPop, trees = trees,
+            truncMethod = truncMethod, selectCopula = selectCopula,
             method = "ml", optimMethod = "")@vine
 
     list(vine = vine, margins = margins, ordering = ordering,

@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{edaOptimize}
 
 \alias{edaOptimize}
@@ -22,7 +24,7 @@ edaOptimizeDisabled(eda, gen, pop, popEval, f, lower, upper)
 
 \item{popEval}{Vector with the evaluation of each solution in \code{pop}.}
 
-\item{f}{Objective function}
+\item{f}{Objective function.}
 
 \item{lower}{Lower bounds of the variables of the objective function.}
   
@@ -52,7 +54,7 @@ A \code{list} with the following components.
 }
 
 \references{
-González-Fernández Y and Soto M (2012). copulaedas: An R Package for
+Gonzalez-Fernandez Y and Soto M (2013). copulaedas: An \R Package for
 Estimation of Distribution Algorithms Based on Copulas. Preprint
 \href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
 }

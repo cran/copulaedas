@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{edaRun}
 
 \alias{edaRun}
@@ -30,11 +32,9 @@ parts: seeding (\code{\link{edaSeed}}), selection (\code{\link{edaSelect}}),
 learning (\code{edaLearn}), sampling (\code{edaSample}), replacement 
 (\code{\link{edaReplace}}), local optimization (\code{\link{edaOptimize}}), 
 termination (\code{\link{edaTerminate}}), and reporting 
-(\code{\link{edaReport}}). 
-
-The following pseudocode illustrates the interactions between all the generic 
-functions that implement the main parts of the EDA. It is a simplified 
-version of the implementation of the \code{\link{edaRun}} function.
+(\code{\link{edaReport}}). The following pseudocode illustrates the interactions 
+between all the generic functions. It is a simplified version of the 
+implementation of the \code{\link{edaRun}} function.
 
 \preformatted{
 gen <- 0
@@ -76,7 +76,7 @@ An \code{\linkS4class{EDAResult}} instance.
 }
 
 \references{
-González-Fernández Y and Soto M (2012). copulaedas: An R Package for
+Gonzalez-Fernandez Y and Soto M (2013). copulaedas: An \R Package for
 Estimation of Distribution Algorithms Based on Copulas. Preprint
 \href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
 }

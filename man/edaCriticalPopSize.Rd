@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{edaCriticalPopSize}
 
 \alias{edaCriticalPopSize}
@@ -44,8 +46,8 @@ edaCriticalPopSize(eda, f, lower, upper, fEval, fEvalTol,
 \details{
 This function determines the minimum population size required by the EDA to 
 reach the value \code{fEval} of the objective function in \code{successRuns} 
-runs of a total of \code{totalRuns} independent runs (critical population 
-size).
+runs out of a total of \code{totalRuns} independent runs (critical 
+population size).
 
 The population size is determined using a bisection method starting with the
 interval delimited by \code{lowerPop} and \code{upperPop}. The bisection 
@@ -65,7 +67,7 @@ of the EDA using the critical population size.
 }
 
 \references{
-González-Fernández Y and Soto M (2012). copulaedas: An R Package for
+Gonzalez-Fernandez Y and Soto M (2013). copulaedas: An \R Package for
 Estimation of Distribution Algorithms Based on Copulas. Preprint
 \href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
 

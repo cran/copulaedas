@@ -1,6 +1,6 @@
 # copulaedas: Estimation of Distribution Algorithms Based on Copulas
-# Copyright (C) 2010-2012 Yasser González Fernández <ygonzalezfernandez@gmail.com>
-# Copyright (C) 2010-2012 Marta Rosa Soto Ortiz <mrosa@icimaf.cu>
+# Copyright (C) 2010-2013 Yasser Gonzalez-Fernandez <ygonzalezfernandez@gmail.com>
+# Copyright (C) 2010-2013 Marta Soto <mrosa@icimaf.cu>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -74,8 +74,8 @@ edaSampleCEDA <- function (eda, gen, model, lower, upper) {
 
     uniformPop <- rCopula(popSize, model$copula)
     if (any(is.na(uniformPop))) {
-        # I got numerical errors with certain matrices when using the
-        # default "eigen" method to determine the matrix root of sigma.
+        # Avoid numerical errors with certain matrices using the default
+        # "eigen" method to determine the matrix root of sigma.
         dim <- model$copula@dimension
         rho <- model$copula@getRho(model$copula)
         sigma <- diag(dim)

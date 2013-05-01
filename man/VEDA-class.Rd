@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{VEDA-class}
 
 \docType{class}
@@ -35,23 +37,25 @@ Objects are created by calling the \code{VEDA} function.
 }
 
 \details{
-Vine EDAs (VEDAs) are a class of EDAs (Soto and González-Fernández 2010;
-González-Fernández 2011) that model the search distributions using vines.
+Vine EDAs (VEDAs) are a class of EDAs (Soto and Gonzalez-Fernandez 2010;
+Gonzalez-Fernandez 2011) that model the search distributions using vines.
 Vines are graphical models that represent high-dimensional distributions by
-decomposing the multivariate density into bivariate copulas and one-dimensional
-densities (Joe 1996; Bedford and Cooke 2001; Aas et al. 2009; 
-Kurowicka and Cooke 2006). Similarly to Copula EDAs, these algorithms estimate
-separately the univariate marginal distributions and the dependence structure
-from the selected population. Instead of representing the dependence structure
-using a single multivariate copula, VEDAs can model a rich variety of dependencies
-by combining bivariate copulas that belong to different families. The following
-instances of VEDA are implemented.
+decomposing the multivariate density into conditional bivariate copulas,
+unconditional bivariate copulas, and one-dimensional densities 
+(Joe 1996; Bedford and Cooke 2001; Aas et al. 2009; Kurowicka and Cooke 2006).
+In particular, VEDAs are based on the simplified pair-copula construction
+(Hobaek Haff et al. 2010). Similarly to Copula EDAs, these algorithms estimate 
+separately the univariate marginal distributions and the dependence structure 
+from the selected population. Instead of representing the dependence structure 
+using a single multivariate copula, VEDAs can model a rich variety of
+dependencies by combining bivariate copulas that belong to different families. 
+The following instances of VEDA are implemented.
 
 \itemize{
 \item{C-vine EDA (CVEDA), that models the search distributions using C-vines
-    (Soto and González-Fernández 2010; González-Fernández 2011).}
+    (Soto and Gonzalez-Fernandez 2010; Gonzalez-Fernandez 2011).}
 \item{D-vine EDA (DVEDA), that models the search distributions using D-vines
-    (Soto and González-Fernández 2010; González-Fernández 2011).}
+    (Soto and Gonzalez-Fernandez 2010; Gonzalez-Fernandez 2011).}
 }
 
 Greedy heuristics based on the empirical Kendall's tau between each variable
@@ -59,13 +63,13 @@ in the selected population are used to determine the structure of the C-vines
 and D-vines in CVEDA and DVEDA, respectively (Brechmann 2010).
 
 The selection of each bivariate copula in both decompositions starts with 
-an independence test (Genest and Rémillard 2004; Genest et al. 2007). 
+an independence test (Genest and RÃ©millard 2004; Genest et al. 2007). 
 The independence copula is selected if there is not enough evidence against 
 the null hypothesis of independence at a given significance level. In the 
 other case, the parameters of a group of candidate copulas are estimated 
 and the one that minimizes a distance to the empirical copula is selected.
-A Cramér-von Mises statistic is used as the measure of distance
-(Genest and Rémillard 2008).
+A CramÃ©r-von Mises statistic is used as the measure of distance
+(Genest and RÃ©millard 2008).
 
 The parameters of all the candidate copulas but the t copula are estimated
 using the inversion of Kendall's tau. In the case of the t copula,
@@ -73,9 +77,15 @@ the correlation coefficient is computed using the inversion of Kendall's tau
 and the degrees of freedom are estimated by maximum likelihood with the 
 correlation parameter fixed (Demarta and McNeil 2005).
 
-Besides, a model selection procedure based on Akaike Information Criterion 
-is used to truncate the vines if enough dependence is captured in the first 
-trees (Brechmann 2010).
+To simplify the construction of the vines the truncation strategy presented in
+(Brechmann 2010) is applied. If a vine is truncated at a given tree, all the
+copulas in the subsequent trees are assumed to be product copulas. By default, 
+a model selection procedure based on AIC (Akaike Information Criterion) is 
+applied to detect the required number of trees, but it is also possible to 
+base the selection on BIC (Bayesian Information Criterion) or completely 
+disable the truncation strategy. Also, a maximum number of dependence trees
+of the vine can be set, which may be helpful when dealing with high-dimensional
+problems.
 
 The following parameters are recognized by the functions that implement 
 the \code{\link{edaLearn}} and \code{\link{edaSample}} methods for the
@@ -85,6 +95,14 @@ the \code{\link{edaLearn}} and \code{\link{edaSample}} methods for the
   \item{\code{vine}}{Vine type. Supported values are: \code{"CVine"}
     (Canonical vine) and \code{"DVine"} (D-vine). Default value:
     \code{"DVine"}.}
+
+  \item{\code{trees}}{Maximum number of dependence trees of the vine. 
+    The default is to estimate a full vine.}
+
+  \item{\code{truncMethod}}{Method used to automatically truncate the vine if
+    enough dependence is captured in the first trees. Supported values
+    are: \code{"AIC"}, \code{"BIC"} and \code{""} (no truncation). Default
+    value: \code{"AIC"}.}
 
   \item{\code{copulas}}{A \code{character} vector specifying the candidate
     copulas. Supported values are: \code{"normal"} (normal copula),
@@ -120,31 +138,35 @@ Applications. Diploma thesis, University of Technology, Munich, Germany.
 Demarta S, McNeil AJ (2005). The t Copula and Related Copulas. 
 \emph{International Statistical Review}, \bold{73}(1), 111--129.
 
-Genest C, Rémillard B (2004). Tests of Independence or Randomness Based 
+Genest C, RÃ©millard B (2004). Tests of Independence or Randomness Based 
 on the Empirical Copula Process. \emph{Test}, \bold{13}(2), 335--369.
 
-Genest C, Quessy JF, Rémillard B (2007). Asymptotic Local Efficiency of 
-Cramér-von mises Tests for Multivariate Independence. \emph{The Annals 
+Genest C, Quessy JF, RÃ©millard B (2007). Asymptotic Local Efficiency of 
+CramÃ©r-von mises Tests for Multivariate Independence. \emph{The Annals 
 of Statistics}, \bold{35}, 166--191.
 
-Genest C, Rémillard B (2008). Validity of the Parametric Bootstrap for 
+Genest C, RÃ©millard B (2008). Validity of the Parametric Bootstrap for 
 Goodness-of-Fit Testing in Semiparametric Models. \emph{Annales de 
-l'Institut Henri Poincaré: Probabilités et Statistiques}, \bold{44}, 
+l'Institut Henri PoincarÃ©: ProbabilitÃ©s et Statistiques}, \bold{44}, 
 1096--1127.
 
-González-Fernández Y (2011). Algoritmos con estimación de distribuciones 
-basados en cópulas y vines. Bachelor thesis, University of Havana, Cuba.
+Gonzalez-Fernandez Y (2011). Algoritmos con estimaciÃ³n de distribuciones 
+basados en cÃ³pulas y vines. Bachelor thesis, University of Havana, Cuba.
 
-González-Fernández Y and Soto M (2012). copulaedas: An R Package for
+Gonzalez-Fernandez Y and Soto M (2013). copulaedas: An \R Package for
 Estimation of Distribution Algorithms Based on Copulas. Preprint
 \href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
 
+Hobaek Haff I, Aas K, Frigessi A (2010). On the Simplified Pair-Copula
+Construction --- Simply Useful or Too Simplistic? Journal of Multivarite
+Analysis, \bold{101}, 1145--1152.
+
 Joe H (1996). Families of \eqn{m}-variate Distributions with Given Margins 
-and \eqn{m(m-1)/2} Bivariate Dependence Parameters. In L Röschendorf, 
+and \eqn{m(m-1)/2} Bivariate Dependence Parameters. In L RÃ¶schendorf, 
 B Schweizer, MD Taylor (eds.), \emph{Distributions with fixed marginals 
 and related topics}, pp. 120--141.
 
-Soto M, González-Fernández Y (2010). Vine Estimation of Distribution Algorithms.
+Soto M, Gonzalez-Fernandez Y (2010). Vine Estimation of Distribution Algorithms.
 Technical Report ICIMAF 2010-561, Institute of Cybernetics, Mathematics and
 Physics, Cuba. ISSN 0138-8916.
 }
