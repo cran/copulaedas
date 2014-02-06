@@ -1,6 +1,6 @@
 # copulaedas: Estimation of Distribution Algorithms Based on Copulas
-# Copyright (C) 2010-2013 Yasser Gonzalez-Fernandez <ygonzalezfernandez@gmail.com>
-# Copyright (C) 2010-2013 Marta Soto <mrosa@icimaf.cu>
+# Copyright (C) 2011-2014 Yasser Gonzalez-Fernandez <ygonzalezfernandez@gmail.com>
+# Copyright (C) 2011-2014 Marta Soto <mrosa@icimaf.cu>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -64,21 +64,21 @@ edaLearnVEDA <- function (eda, gen, previousModel, selectedPop,
         tau <- cor(x, y, method = "kendall")
         for (copula in copulas) {
             if (identical(copula, "normal")) {
-                candidateCopula <- fitCopula(copula = normalCopula(0),
+                candidateCopula <- fitCopula(copula = normalCopula(),
                     data = data, method = "itau",
                     estimate.variance = FALSE)@copula
             } else if (identical(copula, "t")) {
-                rho <- iTau(normalCopula(0), tau)
-                L <- function (df) loglikCopula(c(rho, df), data, normalCopula(0))
+                rho <- iTau(normalCopula(), tau)
+                L <- function (df) loglikCopula(c(rho, df), data, normalCopula())
                 df <- optimize(L, c(1, 30), maximum = TRUE)$maximum
                 candidateCopula <- tCopula(rho, df = df, df.fixed = TRUE)
             } else if (copula %in% c("clayton", "frank", "gumbel")) {
                 # Setting bounds to Kendall's tau to avoid numerical problems.
                 theta <- switch(copula,
-                    clayton = iTau(claytonCopula(1), max(0, min(tau, 0.95))),
-                    frank = iTau(frankCopula(0), max(-0.95, min(tau, 0.95))),
-                    gumbel = iTau(gumbelCopula(1), max(0, min(tau, 0.95))))
-                candidateCopula <- archmCopula(copula, theta)
+                    clayton = iTau(claytonCopula(), max(0, min(tau, 0.95))),
+                    frank = iTau(frankCopula(), max(-0.95, min(tau, 0.95))),
+                    gumbel = iTau(gumbelCopula(), max(0, min(tau, 0.95))))
+                candidateCopula <- archmCopula(copula, theta, use.indepC = "FALSE")
             } else {
                 stop("copula ", dQuote(copula), " not supported")
             }

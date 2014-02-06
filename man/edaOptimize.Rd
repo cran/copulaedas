@@ -34,7 +34,7 @@ edaOptimizeDisabled(eda, gen, pop, popEval, f, lower, upper)
 \details{
 Local optimization methods improve the solutions sampled by the search 
 distribution. These methods can also be used to implement repairing
-strategies for constrained problems where the simulated solutions may be 
+strategies for constrained problems in which the simulated solutions may be 
 unfeasible and some strategy to repair these solutions is available.
 
 The following local optimization methods are implemented.
@@ -54,7 +54,7 @@ A \code{list} with the following components.
 }
 
 \references{
-Gonzalez-Fernandez Y and Soto M (2013). copulaedas: An \R Package for
+Gonzalez-Fernandez Y and Soto M (2013). \pkg{copulaedas}: An \R Package for
 Estimation of Distribution Algorithms Based on Copulas. Preprint
 \href{http://arxiv.org/abs/1209.5429}{arXiv:1209.5429 [cs.NE]}.
 }
