@@ -1,19 +1,19 @@
 # copulaedas: Estimation of Distribution Algorithms Based on Copulas
-# Copyright (C) 2011-2014 Yasser Gonzalez-Fernandez <ygonzalezfernandez@gmail.com>
-# Copyright (C) 2011-2014 Marta Soto <mrosa@icimaf.cu>
+# Copyright (C) 2011-2015 Yasser Gonzalez Fernandez
+# Copyright (C) 2011-2015 Marta Soto Ortiz
 #
-# This program is free software: you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 3 of the License, or (at your option) any later
-# version.
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-# details.
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License along with
-# this program. If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 setClass("VEDA",
     contains = "EDA",
@@ -84,13 +84,7 @@ edaLearnVEDA <- function (eda, gen, previousModel, selectedPop,
             }
 
             # Compute the value of the goodness-of-fit test statistic.
-            candidateStat <- .C("cramer_vonMises",
-                as.integer(nrow(data)),
-                as.integer(ncol(data)),
-                as.double(data),
-                as.double(pCopula(data, candidateCopula)),
-                stat = double(1.0),
-                PACKAGE = "copulaedas")$stat
+            candidateStat <- gofTstat(data, method = "Sn", copula = candidateCopula)
 
             # Select the copula with the smaller value of the statistic.
             if (candidateStat < selectedStat) {
@@ -143,7 +137,7 @@ edaSampleVEDA <- function (eda, gen, model, lower, upper) {
     if (is.null(popSize)) popSize <- 100
     if (is.null(margin)) margin <- "norm"
 
-    qmargin <- get(paste("q", margin, sep = ""))    
+    qmargin <- get(paste("q", margin, sep = ""))
 
     orderedPop <- rvine(model$vine, popSize)
     uniformPop <- matrix(NA, nrow(orderedPop), ncol(orderedPop))
