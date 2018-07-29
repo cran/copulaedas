@@ -1,7 +1,7 @@
 Type: Package
 Package: copulaedas
 Title: Estimation of Distribution Algorithms Based on Copulas
-Version: 1.4.2
+Version: 1.4.3
 Authors@R: c(person("Yasser", "Gonzalez-Fernandez",
 	            role = c("aut", "cre"),
 		    email = "ygonzalezfernandez@gmail.com"),
@@ -25,9 +25,9 @@ Collate: EDA.R edaSeed.R edaSelect.R edaOptimize.R edaReport.R
         edaReplace.R edaTerminate.R edaRun.R margins.R problems.R
         edaIndepRuns.R edaCriticalPopSize.R CEDA.R VEDA.R
 NeedsCompilation: no
-Packaged: 2015-10-22 22:22:50 UTC; yasserglez
+Packaged: 2018-07-29 05:19:56 UTC; yasserglez
 Author: Yasser Gonzalez-Fernandez [aut, cre],
   Marta Soto [aut]
 Maintainer: Yasser Gonzalez-Fernandez <ygonzalezfernandez@gmail.com>
 Repository: CRAN
-Date/Publication: 2015-10-23 01:29:20
+Date/Publication: 2018-07-29 05:50:03 UTC
